@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getaway At Home | The Rustic Kitchen</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="hero-banner">
+        <div class="header-overlay"></div>
+        <div class="banner-content" onclick="goHome()">
+            <img src="https://placehold.co/80/C17C5C/FFFFFF?text=G@H" alt="Logo" class="logo-img">
+            <div class="logo-text">
+                <h1>Getaway At Home</h1>
+                <p class="tagline">Simple. Rustic. Distinct.</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="sticky-navbar">
+        <div class="nav-left">
+            <button class="nav-link" onclick="goHome()">Home</button>
+            <button class="nav-link" onclick="loadFavoritesView()">Favorites</button>
+            <button class="nav-link" onclick="loadShoppingView()">Shopping List</button>
+            <button class="nav-link" onclick="scrollToContact()">Contact</button>
+        </div>
+        <div class="search-container">
+            <input type="text" id="globalSearch" placeholder="Search recipes...">
+        </div>
+    </nav>
+
+    <div class="app-container">
+
+        <section id="landingView" class="view active-view">
+            <div class="hero-text">
+                <h2>Choose Your Kitchen</h2>
+                <p>Select a cuisine to define your pantry essentials.</p>
+            </div>
+            <div class="cuisine-cards">
+                <div class="cuisine-card" onclick="loadCuisine('Indian')">
+                    <div class="cc-img" style="background-image: url('https://placehold.co/600x400/d68c6d/ffffff?text=Indian+Spices');"></div>
+                    <h3>Indian Kitchen</h3>
+                    <p>Spices, Rice, and warmth.</p>
+                </div>
+                <div class="cuisine-card" onclick="loadCuisine('Japanese')">
+                    <div class="cc-img" style="background-image: url('https://placehold.co/600x400/8A9A5B/ffffff?text=Japanese+Zen');"></div>
+                    <h3>Japanese Kitchen</h3>
+                    <p>Umami, Soy, and simplicity.</p>
+                </div>
+                <div class="cuisine-card" onclick="loadCuisine('French')">
+                    <div class="cc-img" style="background-image: url('https://placehold.co/600x400/6b7b8c/ffffff?text=French+Technique');"></div>
+                    <h3>French Kitchen</h3>
+                    <p>Butter, Herbs, and technique.</p>
+                </div>
+            </div>
+        </section>
+        
+        <div id="appView" class="view hidden-view split-layout">
+            <aside class="pantry-sidebar" id="pantrySidebar">
+                <div class="sidebar-header">
+                    <h3 id="pantryTitle">Your Pantry</h3>
+                    <p>Check what you have</p>
+                </div>
+                <form id="pantryForm"></form> 
+                <div class="sidebar-actions">
+                    <button type="button" id="findBtn" class="btn-primary">Find Recipes</button>
+                    <button type="button" id="clearBtn" class="btn-secondary">Clear</button>
+                </div>
+            </aside>
+
+            <main class="content-area">
+                <div class="results-header">
+                    <h2 id="resultsTitle">Recipes</h2>
+                    <span id="recipeCount">0 items</span>
+                </div>
+                <div class="recipe-grid" id="recipeGrid"></div>
+            </main>
+        </div>
+
+        <article id="detailView" class="view hidden-view">
+            <div class="detail-container">
+                <button id="backBtn" class="btn-text">← Back to Recipes</button>
+                <div id="detailContent"></div>
+            </div>
+        </article>
+
+        <section id="shoppingView" class="view hidden-view">
+            <div class="detail-container">
+                <div class="shopping-header">
+                    <h2>My Shopping List</h2>
+                    <p>Add items you need to buy.</p>
+                </div>
+                <div class="shopping-input-area">
+                    <input type="text" id="shoppingInput" placeholder="e.g., Milk, Eggs...">
+                    <button class="btn-primary" id="addShoppingBtn">Add Item</button>
+                </div>
+                <ul id="shoppingListContainer" class="shopping-list"></ul>
+            </div>
+        </section>
+
+    </div>
+
+    <footer id="contactSection" class="site-footer">
+        <div class="footer-content">
+            <h3>Get In Touch</h3>
+            <p>Have a recipe suggestion or found a bug? Let us know!</p>
+            <div class="social-links">
+                <a href="#">Email</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+            <p class="copyright">© 2024 Getaway At Home. Built with Vanilla JS.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
