@@ -1,0 +1,251 @@
+/* --- Variables & Reset --- */
+:root {
+    --bg-cream: #F7F5F0;
+    --bg-dark-beige: #EBE5D9;
+    --text-walnut: #4A3B32;
+    --accent-clay: #C17C5C;
+    --tag-sage: #8A9A5B;
+    --white: #FFFFFF;
+    --font-serif: 'Playfair Display', 'Georgia', serif;
+    --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --nav-height: 70px; 
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-cream);
+    color: var(--text-walnut);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 700; }
+
+/* --- 1. HERO BANNER --- */
+/* --- 1. HERO BANNER --- */
+.hero-banner {
+    position: relative;
+    padding: 3rem 1rem;
+    /* NEW: High-quality Unsplash Image */
+    background: url('rustic-kitchen-with-modern-appliances-inside-generated-by-ai.jpg') no-repeat center center;
+    background-size: cover;
+    color: var(--white);
+    text-align: center;
+}
+
+.header-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(40, 30, 20, 0.7);
+    z-index: 1;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.logo-img {
+    border-radius: 50%;
+    border: 2px solid var(--accent-clay);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.logo-text h1 { margin: 0; font-size: 2.5rem; line-height: 1.2; color: #F7F5F0;}
+.tagline { font-style: italic; opacity: 0.9; margin: 0; }
+
+/* --- 2. STICKY NAV BAR --- */
+.sticky-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: var(--nav-height);
+    background-color: var(--white);
+    border-bottom: 1px solid #dcd6c9;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.nav-left { display: flex; gap: 1.5rem; }
+
+.nav-link {
+    background: none;
+    border: none;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    color: var(--text-walnut);
+    font-weight: bold;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
+    transition: 0.3s;
+}
+.nav-link:hover { color: var(--accent-clay); border-bottom: 2px solid var(--accent-clay); }
+
+.search-container { width: 250px; }
+
+#globalSearch {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--bg-dark-beige);
+    border-radius: 50px;
+    font-family: var(--font-sans);
+    outline: none;
+    font-size: 0.9rem;
+    background: var(--bg-cream);
+}
+#globalSearch:focus { border-color: var(--accent-clay); background: #fff; }
+
+/* Mobile Nav */
+@media (max-width: 768px) {
+    .sticky-navbar { padding: 0 1rem; overflow-x: auto; }
+    .nav-left { gap: 1rem; }
+    .nav-link { font-size: 0.8rem; letter-spacing: 0; white-space: nowrap; }
+    .search-container { display: none; } 
+}
+
+/* --- APP LAYOUT --- */
+.app-container { min-height: 80vh; padding-bottom: 4rem; }
+
+.view { display: none; width: 100%; }
+.active-view { display: block; animation: fadeIn 0.5s ease; }
+.hidden-view { display: none; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- Landing Page --- */
+#landingView { padding: 3rem 2rem; text-align: center; }
+.hero-text { margin-bottom: 2rem; color: var(--text-walnut); }
+.cuisine-cards { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+
+.cuisine-card {
+    background: var(--white);
+    border: 1px solid var(--bg-dark-beige);
+    width: 280px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.cuisine-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+.cc-img { width: 100%; height: 180px; background-size: cover; background-position: center; }
+.cuisine-card h3 { margin-top: 1rem; font-size: 1.4rem; color: var(--text-walnut); }
+.cuisine-card p { padding: 0 1rem 1.5rem; color: #666; font-size: 0.9rem; margin-top: 0.5rem;}
+
+/* --- Split View Layout (FIXED) --- */
+.split-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 80vh;
+}
+
+/* Force Grid on Desktop even when .active-view is present */
+@media (min-width: 768px) {
+    .split-layout { grid-template-columns: 280px 1fr; }
+    /* This specific rule fixes the "Beneath" bug */
+    .split-layout.active-view { display: grid; } 
+    
+    .pantry-sidebar { 
+        height: calc(100vh - var(--nav-height)); 
+        overflow-y: auto; 
+        position: sticky; 
+        top: var(--nav-height); 
+    }
+}
+
+.pantry-sidebar { background-color: var(--white); padding: 2rem; border-right: 1px solid #dcd6c9; }
+.category-group { margin-bottom: 1.5rem; }
+.category-group h4 { font-size: 0.9rem; margin-bottom: 0.8rem; color: var(--accent-clay); text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+.category-group label { display: block; margin-bottom: 0.5rem; cursor: pointer; font-size: 0.95rem; color: #555; }
+.sidebar-actions { display: flex; gap: 10px; margin-top: 2rem; }
+
+/* --- Recipe Grid --- */
+.content-area { padding: 2rem; background-color: #fcfbf8; }
+.results-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2rem; border-bottom: 2px solid var(--bg-dark-beige); padding-bottom: 1rem;}
+.recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; }
+
+.recipe-card {
+    background: var(--white);
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+.recipe-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
+.card-img { width: 100%; height: 200px; object-fit: cover; }
+.card-body { padding: 1.5rem; }
+.card-tag { background: var(--tag-sage); color: #fff; font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px;}
+.card-title { font-size: 1.4rem; margin-top: 0.8rem; color: var(--text-walnut); }
+.card-desc { font-size: 0.95rem; color: #777; margin-top: 0.5rem; line-height: 1.5;}
+
+.heart-btn {
+    position: absolute; top: 10px; right: 10px; background: white; border-radius: 50%; width: 35px; height: 35px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); padding: 0; transition: transform 0.2s; z-index: 10; cursor: pointer; border: none;
+}
+.heart-btn:hover { transform: scale(1.1); }
+.heart-btn.liked { color: #e74c3c; }
+
+/* --- Detail View --- */
+.detail-container { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; background: var(--white); border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-top: 2rem;}
+.detail-header img { width: 100%; height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 2rem; }
+.detail-title { font-size: 3rem; color: var(--text-walnut); line-height: 1.1;}
+.detail-split { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; margin-top: 3rem; }
+@media (max-width: 768px) { .detail-split { grid-template-columns: 1fr; gap: 2rem;} }
+
+/* --- SHOPPING LIST --- */
+.shopping-header { text-align: center; margin-bottom: 2rem; }
+.shopping-input-area { display: flex; gap: 1rem; margin-bottom: 2rem; }
+#shoppingInput { flex-grow: 1; padding: 0.8rem; border: 1px solid var(--bg-dark-beige); border-radius: 4px; font-size: 1rem; }
+
+.shopping-list { list-style: none; padding: 0; }
+.shopping-list li {
+    background: #f9f9f9; padding: 1rem; margin-bottom: 0.5rem; border-radius: 4px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-left: 4px solid var(--accent-clay);
+}
+.delete-btn { background: none; border: none; color: #aaa; cursor: pointer; font-size: 1.2rem; }
+.delete-btn:hover { color: #e74c3c; }
+
+/* --- FOOTER --- */
+.site-footer {
+    background-color: #2c241b;
+    color: #e0d8cf;
+    text-align: center;
+    padding: 3rem 1rem;
+    margin-top: auto; 
+}
+.footer-content h3 { color: var(--accent-clay); margin-bottom: 1rem; }
+.social-links { margin: 1.5rem 0; display: flex; justify-content: center; gap: 1.5rem; }
+.social-links a { color: #fff; text-decoration: none; border-bottom: 1px solid transparent; transition: 0.3s; }
+.social-links a:hover { border-bottom: 1px solid var(--accent-clay); color: var(--accent-clay); }
+.copyright { font-size: 0.85rem; opacity: 0.6; margin-top: 2rem; }
+
+/* --- Buttons --- */
+.btn-primary { background-color: var(--accent-clay); color: var(--white); border: none; padding: 0.7rem 1.4rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
+.btn-secondary { background: transparent; border: 1px solid var(--text-walnut); color: var(--text-walnut); padding: 0.7rem 1.4rem; border-radius: 4px; cursor: pointer; }
+.btn-text { background: none; border: none; color: var(--accent-clay); text-decoration: underline; cursor: pointer; font-size: 1rem;}
+
+.serving-control { display: inline-flex; align-items: center; background-color: var(--bg-dark-beige); border-radius: 30px; padding: 5px; margin: 1.5rem 0; }
+.serving-btn { width: 36px; height: 36px; border-radius: 50%; background: #fff; color: var(--accent-clay); font-size: 1.2rem; padding: 0; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; }
+.serving-display { padding: 0 1.5rem; font-family: var(--font-serif); font-weight: bold; font-size: 1.1rem; }
+
+.ingredients-list ul { list-style: none; padding: 0; }
+.ingredients-list li { padding: 0.8rem 0; border-bottom: 1px solid #eee; display: flex; align-items: center; }
+.ingredient-amount { font-weight: bold; color: var(--accent-clay); margin-right: 10px; min-width: 60px; }
+.steps-list ol { margin-left: 1.5rem; }
+.steps-list li { margin-bottom: 1.5rem; font-size: 1.05rem; color: #444; }
